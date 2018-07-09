@@ -1,0 +1,28 @@
+version: '3'
+
+volumes:
+    composer_data:
+
+services:
+    nginx:
+        container_name: nginx
+        build:
+            context: ./.docker/nginx
+        environment:
+            - PHP_HOST=api
+        volumes:
+            - .:/app:ro
+        ports:
+            - "80:80"
+        depends_on:
+            - api
+
+    api:
+        container_name: api
+        build:
+            context: .
+        volumes:
+            - .:/app
+            - composer_data:/var/run/composer
+        ports:
+            - "9002:9001"
