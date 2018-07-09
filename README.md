@@ -1,1 +1,1 @@
-# php-rest-example
+# REST service example on PHP language
